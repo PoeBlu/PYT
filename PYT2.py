@@ -1,6 +1,6 @@
 from pytube import YouTube
 import os
-from progress.bar import Bar
+
 
 
 print('Сколько видео вы хотите скачать?\n'
@@ -39,7 +39,7 @@ elif task == 2:
     a = 0
     if os.path.isdir(path):
         print('Загрузка в максимальном качестве началась')
-        bar = Bar('Processing', max=(quantity/2))
+        
         for video in list_link:
             yt = YouTube(list_link[a])
             v_name = yt.title
@@ -47,18 +47,18 @@ elif task == 2:
             bar.next()
             print(' Видео номер {} скачалось'.format(a + 1))
             a = a + 1
-        bar.finish()
+        
         print('Загрузка видео завершена')
     else:
         os.mkdir(path)
         print('Создана папка для видео по пути C:\Downloaded Videos')
         print('Загрузка в максимальном качестве началась')
-        bar = Bar('Processing', max=(quantity / 2))
+       
         for video in list_link:
             yt = YouTube(list_link[a])
             v_name = yt.title
             yt.streams.get_highest_resolution().download(path, v_name)
             print('Видео номер {} скачалось'.format(a + 1))
             a = a + 1
-        bar.finish()
+        
         print('Загрузка видео завершена')
